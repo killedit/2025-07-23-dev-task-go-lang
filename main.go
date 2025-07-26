@@ -89,6 +89,7 @@ func main() {
 	for {
 		time.Sleep(10 * time.Second)
 		fmt.Println("DB is still alive... (Press Ctrl+C to exit)")
+		mutateRandomValue(store)
 	}
 }
 
@@ -227,4 +228,14 @@ func (s *SchrodingerStore) Dump() {
 	} else {
 		fmt.Printf("\nTotal entries: %d\n", count)
 	}
+}
+
+func mutateRandomValue(store *SchrodingerStore) {
+	key, err := store.getRandomKey()
+	if err != nil {
+		return
+	}
+	newValue := fmt.Sprintf("mutated_%d", time.Now().UnixNano())
+	store.Put(key, newValue)
+	fmt.Printf("Value for key '%s' mutated to '%s'\n", key, newValue)
 }

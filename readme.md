@@ -40,6 +40,7 @@ dev_task_go_lang-app  | DB is still alive... (Press Ctrl+C to exit)
 
 Please note that if the db container is failing to build/run the port might be in use by another process. Just pick another port and map it to 5432 on this line `{free_port}:5432` in `docker-compose.yaml`.
 
+## Connect to the DB
 3. Connect to PostgreSQL in DBeaver to monitor the records.
 
 ```
@@ -54,6 +55,7 @@ You should see a DB with just one table `dev_task_go_lang > Databases > Schemas 
 
 In Laravel/PHP db migrations and seeding is done at `docker compose up` step and this is the approach I was after. I have used an `entrypoint.sh` bash script.
 
+## Features
 4. App usage.
 
 ```
@@ -89,6 +91,7 @@ Then in each function we have cases that follow the task's requirements:
 - Get - 30% of the time will return a random result you did not ask for.
 - Delete - 30% of the time will delete a random key instead of one you asked for.
 
+## Tests
 7. Tests are included in `schrodinger_test.go`.
 
 7.1. TestSchrodingerStore_BasicOperations():
@@ -132,7 +135,15 @@ Put, Get, Delete randomnly misbehave in `TestSchrodingerStore_BasicOperations()`
 
 If you need the result from Dump() to be sorted by last created record please replace `ORDER BY key` in the query with `ORDER BY created_at DESC`.
 
-8. Exit the app and remove the containers.
+## Automatically mutating records
+8. Optional twist - added an additional go routine `mutateRandomValue()` that will mutate records in the DB. Perhaps could be commented out for initial test of the application.
+
+```
+dev_task_go_lang-app  | Value for key 'chaos_concurrent_key_2' mutated to 'mutated_1753557004350350761'
+```
+
+## Clean up
+9. Exit the app and remove the containers.
 
 ```
 exit+Enter
