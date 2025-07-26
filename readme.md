@@ -40,7 +40,7 @@ dev_task_go_lang-app  |   -example  : Run example usage
 dev_task_go_lang-app  | DB is still alive... (Press Ctrl+C to exit)
 ```
 
-Please note that if the db container is failing to build/run the port might be in use by anther process. Just pick another port and map it to {5455}:5432 in `docker-compose.yaml`.
+Please note that if the db container is failing to build/run the port might be in use by anther process. Just pick another port and map it to 5432 on this line {free_port}:5432 in `docker-compose.yaml`.
 
 3. Connect to PostgreSQL in DBeaver to monitors the records.
 
@@ -52,7 +52,7 @@ Username:   go_user
 Password:   go_password
 ```
 
-You should see a DB wiht just one table `dev_task_go_lang > Databases > Schemas > public > Tables > table_key_value` where key=>value are animal=>sound.
+You should see a DB wiht just one table `dev_task_go_lang > Databases > Schemas > public > Tables > table_key_value`.
 
 In Laravel/PHP db migrations and seeding is done at `docker compose up` step and this is the approach I was after. I have used an `entrypoint.sh` bash script.
 
