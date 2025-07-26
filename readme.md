@@ -1,5 +1,5 @@
 # Dev task in Go Lang
-<em>Genuine app setup and usage description without the use of AI.</em>
+<em>App setup and usage description.</em>
 
 ## Build up the Docker containers
 1. Download the project to a desired location.
@@ -8,13 +8,11 @@
 git clone https://github.com/killedit/2025-07-23-dev-task-go-lang
 ```
 
-2. Build the containers from the project folder. Ofc `docker` engine and `docker compose` are required. The task does not require the use of Docker, but have I decided this is the easiest way to ensure my application runs the same way on any platform.
+2. Build the containers from the project folder. Of course `docker` engine and `docker compose` are required. The task does not require the use of Docker, but have I decided this is the easiest way to ensure my application runs the same way on any platform.
 
 ```
 docker compose up --build
 ```
-
-<em>All free AI tools still promote the deprecated `docker-compose`.</em>
 
 Skipping the `-d` flag will not detach and will output the logs in the terminal and there's no need to tail the logs `docker container logs -f --tail 0 dev_task_go_lang-app` or opening Docker Desktop (GUI).
 
@@ -27,7 +25,7 @@ dev_task_go_lang-app  | DB connected: true
 dev_task_go_lang-app  | Seeding the DB
 dev_task_go_lang-app  | ===
 dev_task_go_lang-app  | Quantum chaos: Put(cat, meow) silently failed
-dev_task_go_lang-app  | Quantum chaos: Put(dog, dark) stored as (chaos_dog, dark)
+dev_task_go_lang-app  | Quantum chaos: Put(dog, bark) stored as (chaos_dog, bark)
 dev_task_go_lang-app  | Seeding complete.
 dev_task_go_lang-app  | Starting DB.
 dev_task_go_lang-app  | 2025/07/26 13:53:26 Connected to PostgreSQL database
@@ -40,9 +38,9 @@ dev_task_go_lang-app  |   -example  : Run example usage
 dev_task_go_lang-app  | DB is still alive... (Press Ctrl+C to exit)
 ```
 
-Please note that if the db container is failing to build/run the port might be in use by anther process. Just pick another port and map it to 5432 on this line {free_port}:5432 in `docker-compose.yaml`.
+Please note that if the db container is failing to build/run the port might be in use by another process. Just pick another port and map it to 5432 on this line `{free_port}:5432` in `docker-compose.yaml`.
 
-3. Connect to PostgreSQL in DBeaver to monitors the records.
+3. Connect to PostgreSQL in DBeaver to monitor the records.
 
 ```
 Host:       db
@@ -52,7 +50,7 @@ Username:   go_user
 Password:   go_password
 ```
 
-You should see a DB wiht just one table `dev_task_go_lang > Databases > Schemas > public > Tables > table_key_value`.
+You should see a DB with just one table `dev_task_go_lang > Databases > Schemas > public > Tables > table_key_value`.
 
 In Laravel/PHP db migrations and seeding is done at `docker compose up` step and this is the approach I was after. I have used an `entrypoint.sh` bash script.
 
@@ -78,7 +76,7 @@ go run . -get-key=test
 go run . -delete-key=test
 ```
 
-6. This part of the code introduces about 30% chance of any operaion misbehaving. There is a test to confirm it later.
+6. This part of the code introduces about 30% chance of any operation misbehaving. There is a test to confirm it later.
 
 ```
 func quantumChaos() bool {
@@ -141,4 +139,4 @@ exit+Enter
 docker compose down
 ```
 
-P.S. Thank you in advance! I will appreciate any feedback.s
+P.S. Thank you in advance! I will appreciate any feedback.
