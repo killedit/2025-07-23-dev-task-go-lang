@@ -4,7 +4,7 @@ services:
   db:
     image: postgres:15
     container_name: dev_task_go_lang-db
-    restart: always
+    restart: "no"
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
